@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Once Caldas App</title>
 
-<!-- TIPOGRAFÍAS -->
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- CHART -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -30,12 +30,12 @@ body {
   display: block;
 }
 
-/* TITULOS */
+
 h1, h2 {
   font-family: 'DM Serif Display', serif;
 }
 
-/* MENU */
+
 .cards {
   display: flex;
   gap: 10px;
@@ -77,7 +77,6 @@ h1, h2 {
   width: 90px;
 }
 
-/* OBSERVACIONES */
 .box {
   background: #fff;
   padding: 20px;
@@ -85,7 +84,6 @@ h1, h2 {
   margin-top: 20px;
 }
 
-/* FORMULARIO */
 .header-img {
   width: 100%;
   border-radius: 0 0 40px 40px;
@@ -113,7 +111,6 @@ button {
   margin-top: 10px;
 }
 
-/* NAVBAR */
 .navbar {
   position: fixed;
   bottom: 0;
@@ -135,7 +132,6 @@ button {
 
 <body>
 
-<!-- 🔴 MENÚ PRINCIPAL -->
 <section class="screen active" id="menu">
   <h2>MENÚ PRINCIPAL</h2>
   <p>Bienvenido Daniel. Escoge la sección que deseas explorar.</p>
@@ -152,7 +148,6 @@ button {
   </div>
 </section>
 
-<!-- 🧍 PERFIL -->
 <section class="screen" id="perfil">
 
   <h2>DANIEL SIERRA</h2>
@@ -171,7 +166,6 @@ button {
 
 </section>
 
-<!-- 📝 OBSERVACIONES -->
 <section class="screen" id="observaciones">
 
   <h2>OBSERVACIONES</h2>
@@ -186,7 +180,6 @@ button {
 
 </section>
 
-<!-- 📄 FORMULARIO -->
 <section class="screen" id="formulario">
 
   <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db" class="header-img">
@@ -210,7 +203,6 @@ button {
 
 </section>
 
-<!-- 🔽 NAVBAR -->
 <div class="navbar">
   <div onclick="goTo('menu')">🏠</div>
   <div onclick="goTo('perfil')">📊</div>
@@ -220,7 +212,6 @@ button {
 
 <script>
 
-/* NAVEGACIÓN */
 function goTo(screenId) {
   document.querySelectorAll(".screen").forEach(s => {
     s.classList.remove("active");
@@ -228,7 +219,6 @@ function goTo(screenId) {
   document.getElementById(screenId).classList.add("active");
 }
 
-/* GRÁFICA */
 const ctx = document.getElementById('radarChart');
 
 new Chart(ctx, {
