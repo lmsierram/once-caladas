@@ -12,7 +12,7 @@ La aplicación busca transformar una monografía tradicional en una **experienci
 ## ✦ 🌐 Ver proyecto
 
 🚀 Explora la aplicación aquí:  
-👉 https://lmsierram.github.io/Portafolio/
+👉 https://lmsierram.github.io/once-caladas/
 
 ---
 
