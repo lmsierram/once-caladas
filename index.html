@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Once Caldas App</title>
+
+<!-- TIPOGRAFÍAS -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- CHART -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* RESET */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #F6F2E7;
+}
+
+/* PANTALLAS */
+.screen {
+  display: none;
+  padding: 20px;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* TITULOS */
+h1, h2 {
+  font-family: 'DM Serif Display', serif;
+}
+
+/* MENU */
+.cards {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.red { background: #D32F2F; }
+.blue { background: #3F51B5; }
+
+.match {
+  margin-top: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* PERFIL */
+.perfil-card {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.perfil-card img {
+  width: 90px;
+}
+
+/* OBSERVACIONES */
+.box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* FORMULARIO */
+.header-img {
+  width: 100%;
+  border-radius: 0 0 40px 40px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: none;
+  background: #eee;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border-radius: 20px;
+  background: #D32F2F;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+}
+
+.navbar div {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔴 MENÚ PRINCIPAL -->
+<section class="screen active" id="menu">
+  <h2>MENÚ PRINCIPAL</h2>
+  <p>Bienvenido Daniel. Escoge la sección que deseas explorar.</p>
+
+  <div class="cards">
+    <div class="card red" onclick="goTo('perfil')">ENTRENAMIENTO</div>
+    <div class="card blue" onclick="goTo('perfil')">GRÁFICAS</div>
+    <div class="card red" onclick="goTo('formulario')">INFORMACIÓN</div>
+  </div>
+
+  <div class="match">
+    <p>ONCE CALDAS vs MILLONARIOS</p>
+    <h3>0 - 0</h3>
+  </div>
+</section>
+
+<!-- 🧍 PERFIL -->
+<section class="screen" id="perfil">
+
+  <h2>DANIEL SIERRA</h2>
+
+  <div class="perfil-card">
+    <div>
+      <p><strong>Edad:</strong> 16</p>
+      <p><strong>Estatura:</strong> 1.89</p>
+      <p><strong>Categoría:</strong> 2008</p>
+      <p><strong>Posición:</strong> Defensa</p>
+    </div>
+    <img src="https://via.placeholder.com/100">
+  </div>
+
+  <canvas id="radarChart"></canvas>
+
+</section>
+
+<!-- 📝 OBSERVACIONES -->
+<section class="screen" id="observaciones">
+
+  <h2>OBSERVACIONES</h2>
+
+  <div class="box">
+    <p><strong>Profesor:</strong> Camilo Torres</p>
+    <p>
+      El estudiante presenta buena comprensión táctica y ejecución correcta en defensa.
+      Sin embargo, debe mejorar su condición física y constancia.
+    </p>
+  </div>
+
+</section>
+
+<!-- 📄 FORMULARIO -->
+<section class="screen" id="formulario">
+
+  <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db" class="header-img">
+
+  <h2>INFORMACIÓN PERSONAL</h2>
+  <p>Completa la información para obtener datos detallados</p>
+
+  <input placeholder="Nombres completos del jugador">
+  <input placeholder="Apellidos completos del jugador">
+
+  <select>
+    <option>Categoría del jugador</option>
+    <option>2006</option>
+    <option>2007</option>
+    <option>2008</option>
+    <option>2009</option>
+    <option>2010</option>
+  </select>
+
+  <button onclick="goTo('menu')">CONTINUAR</button>
+
+</section>
+
+<!-- 🔽 NAVBAR -->
+<div class="navbar">
+  <div onclick="goTo('menu')">🏠</div>
+  <div onclick="goTo('perfil')">📊</div>
+  <div onclick="goTo('observaciones')">📝</div>
+  <div onclick="goTo('formulario')">👤</div>
+</div>
+
+<script>
+
+/* NAVEGACIÓN */
+function goTo(screenId) {
+  document.querySelectorAll(".screen").forEach(s => {
+    s.classList.remove("active");
+  });
+  document.getElementById(screenId).classList.add("active");
+}
+
+/* GRÁFICA */
+const ctx = document.getElementById('radarChart');
+
+new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['Ataque', 'Creatividad', 'Físico', 'Defensa', 'Habilidad'],
+    datasets: [{
+      data: [82, 82, 40, 100, 37],
+      fill: true
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>
